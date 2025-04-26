@@ -71,27 +71,28 @@ Ubuntu Server 22.04
  
 *Created install.yaml Ansible Playbook:
 
----
-- hosts: localhost
-  become: true
-  tasks:
-    - name: Install Jenkins, Java, and Docker
-      script: jenkins_install.sh
+    ---
+    - hosts: localhost
+      become: true
+      tasks:
+      - name: Install Jenkins, Java, and Docker
+        script: jenkins_install.sh
 
-- hosts: test
-  become: true
-  tasks:
-    - name: Install Java and Docker on Test
-      script: dependencies.sh
+    - hosts: test
+      become: true
+      tasks:
+      - name: Install Java and Docker on Test
+        script: dependencies.sh
 
-- hosts: prod
-  become: true
-  tasks:
-    - name: Install Java and Docker on Production
-      script: dependencies.sh
+    - hosts: prod
+      become: true
+      tasks:
+      - name: Install Java and Docker on Production
+        script: dependencies.sh
       
 *Checked server connectivity
-   ansible -m ping all
+
+    ansible -m ping all
    
 *Ran the playbook:
 
@@ -123,11 +124,12 @@ On Master:
 *Created a Dockerfile:
 
 dockerfile:
-FROM ubuntu
-RUN apt update
-RUN apt install apache2 -y
-ADD . /var/www/html
-ENTRYPOINT apachectl -D FOREGROUND
+
+    FROM ubuntu
+    RUN apt update
+    RUN apt install apache2 -y
+    ADD . /var/www/html
+    ENTRYPOINT apachectl -D FOREGROUND
 
 *Added and committed Dockerfile:
 
